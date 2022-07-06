@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}TODO | {% if page == 'create-page' %}Add Task{% else %}Edit Task{% endif %}{% endblock title %}
+
+{% block content %}
+
+<div class="container py-6">
+    <div class="columns is-multiline">
+        <div class="column is-6 is-offset-3">
+
+            <div class="box">
+                <div class="block">
+                    <a class="button is-primary" href="{{ request.META.HTTP_REFERER }}"><span>&#8678;</span> &nbsp; Orqaga</a>
+                </div>
+
+                <h1 class="title is-size-4 block has-text-centered">{% if page == 'create-page' %}Add Task{% else %}Edit Task{% endif %}</h1>
+
+
+                <form action="" method="post">
+                    {% csrf_token %}
+    
+                    {% for field in form %}
+                        <div class="field">
+                            <label class="label">{{ field.label }}</label>
+                            <div class="control">
+                              {{ field }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="is-flex is-justify-content-space-between">
+                        <div class="buttons">
+                            <input class="button is-primary" type="submit" value="{% if page == 'create-page' %}Add{% else %}Edit{% endif %}">
+                        </div>
+                    </div>
+    
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

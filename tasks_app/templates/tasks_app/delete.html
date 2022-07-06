@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Task | delete confirm{% endblock title %}
+
+{% block content %}
+
+<div class="container py-6">
+    <div class="columns is-multiline">
+        <div class="column is-6 is-offset-3">
+
+            <div class="box">
+                <h1 class="title is-size-4 block has-text-centered">Delete</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <p class="block"><span class="is-italic">{{ task.title }}</span> ni o'chirmoqchimisiz?</p>
+                    <div class="buttons">
+                        <a class="button is-primary" href="{{ request.META.HTTP_REFERER }}">Orqaga</a>
+                        <input class="button is-danger" type="submit" value="Delete">
+                    </div>
+    
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

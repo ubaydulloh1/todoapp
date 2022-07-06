@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock title %}
+{% block content %}
+
+<div class="container">
+    <div class="block">
+        <div class="columns is-multiline">
+            <div class="column is-8 is-offset-2">
+                <div class="box my-5">
+                    <h3 class="title is-3 has-text-centered has-text-primary">Search Tasks</h3>
+                    <form action="" method="get">
+                        <input type="text" class="input is-primary block mb-6" placeholder="Search tasks..." id="search" name="search" value='{{ search_value }}'>
+                    </form>
+                    <p>{{ tasks.count }} ta task topildi!</p>
+                    <div class="has-text-right my-3">
+                        <a href="{% url 'tasks_app:create-task' %}?next={{request.path}}" class="button is-primary">&#65291; Add Task</a>
+                    </div>
+                    <div class="tasks">
+                        {% for task in tasks %}
+                        <div class="box my-0" style="background: rgba(0, 0, 0, 0.02); box-shadow: none; border: 1px solid #eee;">
+                            <div class="is-flex is-justify-content-space-between">
+                                <h2 class="title is-4"><a class="has-text-primary" href="{% url 'tasks_app:task-detail' task.id %}?next={{request.path}}">{{ task.title }}</a></h2>
+                                
+                                {% if task.is_pinned %}
+                                <p><i class="fa-solid fa-bell"></i></p>
+                                {% endif %}
+
+                                <div>
+                                    <div class="dropdown is-hoverable is-right">
+                                        <div class="dropdown-trigger m-0 p-0">
+                                          <a class="" aria-haspopup="true" aria-controls="dropdown-menu2">
+                                            <span class="icon is-small m-0 p-0">
+                                                <i class="has-text-dark fa-solid fa-ellipsis"></i>
+                                            </span>
+                                          </a>
+                                        </div>
+                                        <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                                          <div class="dropdown-content">
+                                            <a class="dropdown-item" href="{% url 'tasks_app:set-as-done-task' task.id %}">
+                                                <i class="fa-solid fa-clipboard-check"></i> &nbsp; {% if task.is_completed %}set as undone{% else %}set as done{% endif %}
+                                            </a>
+                                            <a class="dropdown-item" href="{% url 'tasks_app:pin-task' task.id %}">
+                                                <i class="fa-solid fa-bell"></i> &nbsp; {% if task.is_pinned %}unpin task{% else %}pin task{% endif %}
+                                            </a>
+                                            <a href="{% url 'tasks_app:task-edit' task.id %}?next={{request.path}}" class="dropdown-item">
+                                                <i class="fa-solid fa-pen-to-square"></i> &nbsp; edit
+                                            </a>
+                                            <a class="dropdown-item" href="{% url 'tasks_app:delete-task' task.id %}?next={{request.path}}">
+                                                <i class="fa-solid fa-trash-can"></i> &nbsp; delete
+                                            </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+
+                            </div>
+                            <p>{{ task.description|truncatewords:20 }}</p>
+                            {% if task.is_completed %}
+                                <p class="has-text-right block">&nbsp; <span><i class="fa-solid fa-circle-check is-size-4 has-text-success"></i></span></p>
+                            {% endif %}
+                            <p class="has-text-right"><small>{{ task.created|timesince }} ago</small></p>
+
+                        </div>
+                        {% empty %}
+                            <h2 class="subtitle is-5 has-text-centered py-6 has-background-light">Tasklar yo'q!</h2>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

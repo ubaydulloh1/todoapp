@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Task Detail{% endblock title %}
+{% block content %}
+
+<div class="container">
+    <div class="block">
+        <div class="columns is-multiline">
+            <div class="column is-8 is-offset-2">
+                <div class="box my-6">
+                    
+                    <div class="is-flex is-justify-content-space-between my-3">
+                        <div>
+                            <a class="button is-primary" href="{{ request.META.HTTP_REFERER }}"><span>&#8678;</span> &nbsp; Orqaga</a>
+                        </div>
+                        <div>
+                            <a href="{% url 'tasks_app:delete-task' task.id %}?next={{request.path}}"  class="button is-primary"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="{% url 'tasks_app:task-edit' task.id %}?next={{request.path}}" class="button is-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="tasks has-background-light p-3">
+                        <h2 class="title is-4">{{ task.title }}</h2>
+                        <p>{{ task.description|linebreaksbr }}</p>
+                        <p class="has-text-right"><small>{{ task.created }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
