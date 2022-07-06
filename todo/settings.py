@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 's_orca',
-        'USER': 'postgres',
-        'PASSWORD': '1111',
-        'HOST': 'localhost',
+        'NAME': 'd4632vvdoo35p8',
+        'USER': 'gyifsqjhcgruav',
+        'PASSWORD': 'd8245057c872f0ab396609c29fac88154aae4cefd31cfab232d772b384a600a3',
+        'HOST': 'ec2-3-219-229-143.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
